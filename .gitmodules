@@ -1,0 +1,17 @@
+[submodule "lib/automata-dcap-qpl"]
+	path = lib/automata-dcap-qpl
+	url = https://github.com/Diffuse-fi/automata-dcap-qpl
+
+[submodule "lib/automata-on-chain-pccs"]
+	path = lib/automata-on-chain-pccs
+	url = https://github.com/Diffuse-fi/automata-on-chain-pccs
+
+[submodule "lib/automata-dcap-attestation"]
+	path = lib/automata-dcap-attestation
+	url = https://github.com/Diffuse-fi/automata-dcap-attestation
+[submodule "lib/p256-verifier"]
+	path = lib/p256-verifier
+	url = https://github.com/daimo-eth/p256-verifier
+[submodule "lib/risc0-foundry-template"]
+	path = lib/risc0-foundry-template
+	url = https://github.com/risc0/risc0-foundry-template.git
