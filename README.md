@@ -1,0 +1,2 @@
+# sgx_verification_infrastructure_deployer
+Automate automata's contracts deployment
