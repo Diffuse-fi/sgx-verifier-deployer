@@ -73,8 +73,35 @@ forge script --rpc-url=$RPC_URL --broadcast script/Deploy.s.sol
 ```
 and write RiscZeroGroth16Verifier address fto addresses/<your-chain>/RISCZERO_VERIFIER.txt
 
+### SP1 verifier
+is not supported, we use risc0 and I slipped everything related to sp1
+
 ### run deployment script
+Place P256 verifier address to addresses/<your-chain>/DAIMO_P256.txt if it is already deployed on your chain (or script will deploy it new one). Run script:
 ```
 python script/deploy.py
 ```
+it will deploy all needed contracts and write addresses to addresses/<your-chain>/ dir.
 
+### run deployment script
+Upload certificates to PCS_DAO:
+```
+python script/upsert.py
+```
+
+### run deployment script
+Use qpl tool to update missing collaterals:
+```
+cd lib/automata-dcap-qpl/automata-dcap-qpl-tool
+cargo build --release
+./target/release/automata-dcap-qpl-tool --quote_file=../../automata-dcap-zkvm-cli/data/quote.hex --private_key=$PRIVATE_KEY
+#TODO here we will need to pass rpc url and other stuff that is hardcoded now
+# maybe should wrap into cli
+```
+Maybe you will need to run it several times if I remover loop from it. Desired result is
+```missing_collateral: None```
+
+**IMPORTANT!** You have to use qpl-tool with quote from your machine, not an example quote! Tool will request collaterals from intel's API for cpu that created the quote and will upload them to the to chain. Then automata-dcap-zkvm-cli will parse data from chain and will fail if there are no data for you cpu.
+
+### Great job!
+Sgx verification infrastructure should be ready to work now! You can try to use automata-dcap-zkvm-cli, journal and seal verification should succeed.
