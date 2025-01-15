@@ -2,7 +2,7 @@ from datetime import datetime
 import subprocess
 import os
 import sys
-from utils.functions import addr_filename, parse_env_var, extract_address_from_logs, form_command
+from utils.functions import is_already_deployed, parse_env_var, extract_address_from_logs, form_command
 from utils.network import LOCAL
 from utils.wrapper import pccs_helpers
 from utils.wrapper import automata_dao_contracts
@@ -44,10 +44,8 @@ def deploy_contract(network, contract, method=None, input=None):
 
     print("deploying " + contract.script_contract_name + "... ", end ="")
 
-    if contract.env_var_name != "":
-        if os.path.exists(addr_filename(network, contract)):
-            print(contract.env_var_name + " is alreary deployed, skipping")
-            parse_env_var(network, contract)
+    if contract.env_var_name != "" or contract == DEPLOY_AUTOMATA_DAO:
+        if is_already_deployed(network, contract) == True:
             return
 
     log = call_script(network, contract, method, input)
@@ -81,7 +79,7 @@ def main(network):
     # 2 steps not from on-chain-pccs, because they are hardcoded in original automata repo
     #TODO: don't need to deploy if RIP7212_P256_PRECOMPILE, not handled now and deploys in any case
     deploy_contract(network, DAIMO_P256, input=["--private-key", os.getenv("PRIVATE_KEY")])
-    parse_env_var(network, RIP7212_P256_PRECOMPILE)
+    os.environ["RIP7212_P256_PRECOMPILE"] = '0x0000000000000000000000000000000000000100'
 
     deploy_contract(network, DEPLOY_AUTOMATA_DAO, input=["true"])
     call_script(network, CONFIG_AUTOMATA_DAO)
@@ -104,7 +102,6 @@ def main(network):
         method="configureZk(uint8 zk, address verifierGateway, bytes32 programId)",
         input=["1", os.getenv("RISCZERO_VERIFIER"), ImageID]
     )
-    # TODO: add risc0 verifier deployment and configureZk call
 
 
 main(LOCAL)
