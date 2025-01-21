@@ -2,8 +2,9 @@ from datetime import datetime
 import subprocess
 import os
 import sys
+import argparse
 from utils.functions import is_already_deployed, parse_env_var, extract_address_from_logs, form_command
-from utils.network import LOCAL_NETWORK
+from utils.network import *
 from utils.wrapper import pccs_helpers
 from utils.wrapper import automata_dao_contracts
 from utils.wrapper import DAIMO_P256, RIP7212_P256_PRECOMPILE
@@ -103,4 +104,8 @@ def deploy(network):
 
 
 if __name__ == "__main__":
-    deploy(LOCAL_NETWORK)
+    parser = argparse.ArgumentParser(description="Data feeder parameters")
+    parser.add_argument('-n', '--network', type=network_class, required=True, help="Choose network")
+    args = parser.parse_args()
+
+    deploy(args.network)

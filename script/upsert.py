@@ -1,5 +1,6 @@
 import subprocess
 import os
+import argparse
 from utils.network import *
 
 def upsert(network):
@@ -30,4 +31,8 @@ def upsert(network):
         subprocess.run(cmd)
 
 if __name__ == "__main__":
-    upsert(LOCAL_NETWORK)
+    parser = argparse.ArgumentParser(description="Data feeder parameters")
+    parser.add_argument('-n', '--network', type=network_class, required=True, help="Choose network")
+    args = parser.parse_args()
+
+    upsert(args.network)
