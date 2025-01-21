@@ -40,10 +40,18 @@ ETH_MAINNET = NetworkClass(
     chain_id="1"
 )
 
+TAIKO_HEKLA = NetworkClass(
+    name="taiko_hekla",
+    dirname = "taiko_hekla/",
+    rpc_url="https://rpc.hekla.taiko.xyz",
+    chain_id="167009"
+)
+
 networks = [
     LOCAL_NETWORK,
     NEON_DEVNET,
     ETH_SEPOLIA,
+    TAIKO_HEKLA,
     ETH_MAINNET
 ]
 
