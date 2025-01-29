@@ -2,7 +2,7 @@ import os
 from .wrapper import DEPLOY_AUTOMATA_DAO, automata_dao_contracts
 
 def addr_filename(network, contract, root=None):
-    addr = "addresses/" + network.dirname + contract.env_var_name + ".txt"
+    addr = "addresses/" + network.dirname + contract.env_var_name
     if root:
         addr = root + addr
     return addr

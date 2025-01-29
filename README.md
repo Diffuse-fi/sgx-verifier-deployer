@@ -3,7 +3,7 @@
 This repository contains scripts for Automata's SGX verification contracts deployment. These scripts ensure smooth deployment on multiple chains and are essential for continuous updates of our infrastructure.
 
 ## Overview
-All scripts parse addresses as environment variables. Addresses are stored in addresses/chain_name/env_var_name.txt. So, if there are no contracts at all, like in a fresh local node, then deploy/script.py will deploy all contracts and will write addresses to appropriate .txt files. If there are some contracts, for example, the chain already has DAIMO_P256 and RISCZERO_VERIFIER deployed, but no automata contracts, then write addresses to the corresponding files which will be used in further steps. Here is a brief overview of the contracts: 
+All scripts parse addresses as environment variables. Addresses are stored in addresses/chain_name/env_var_name. So, if there are no contracts at all, like in a fresh local node, then deploy/script.py will deploy all contracts and will write addresses to appropriate files. If there are some contracts, for example, the chain already has DAIMO_P256 and RISCZERO_VERIFIER deployed, but no automata contracts, then write addresses to the corresponding files which will be used in further steps. Here is a brief overview of the contracts: 
 
 
 - **RIP7212_P256_PRECOMPILE** – Naive quote verification using secp256r1 signature verification. `P256Configuration.sol` checks if the precompile exists and uses it as a verifier. Some chains may have it but not at the 0x100 address. You have the opportunity to define a custom precompile address.
@@ -39,8 +39,8 @@ Some chains may contain already deployed contracts (steps 1-2 done) but with out
 
 ⚠️ IMPORTANT! ⚠️ You have to use `qpl-tool` with a quote from your machine, not an example quote! The tool will request collaterals from Intel's API for the CPU that created the quote and will upload them on chain. Then automata-dcap-zkvm-cli will parse data from the chain and will fail if there is no data for the target CPU. You will need to update the path to quote in `script/run_qpl_tool.py`
 
-Scripts read addresses from `addresses/<chain-name>/<environment-variable-name>.txt`.
-Add your chain to `script/utils/network.py and contract addresses to addresses/<chain-name>.txt`.
+Scripts read addresses from `addresses/<chain-name>/<environment-variable-name>`.
+Add your chain to `script/utils/network.py and contract addresses to addresses/<chain-name>`.
 For example, a fresh local node with no contra will have no addresses in `addresses/local/`,
 Some chain may contain p256-verifier and risc0-verifier, then there should be 2 files in `addresses/<chain-name>/`
 If everything is deployed then you will need to place 15 files into the corresponding directory.

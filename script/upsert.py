@@ -17,7 +17,7 @@ def upsert(network):
     ]
 
 
-    with open('addresses/' + network.dirname + '/PCS_DAO.txt', 'r') as file:
+    with open('addresses/' + network.dirname + '/PCS_DAO', 'r') as file:
         PCS_DAO = file.read().strip()
 
     for i in range(len(attributes)):
