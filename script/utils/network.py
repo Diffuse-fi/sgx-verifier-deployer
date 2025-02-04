@@ -10,6 +10,7 @@ class NetworkClass:
     chain_id: str
 
 alchemy_api_key = os.getenv('ALCHEMY_API_KEY')
+monad_api_key = os.getenv('MONAD_API_KEY')
 
 
 LOCAL_NETWORK = NetworkClass(
@@ -47,11 +48,28 @@ TAIKO_HEKLA = NetworkClass(
     chain_id="167009"
 )
 
+ARTHERA_TESTNET = NetworkClass(
+    name="arthera_testnet",
+    dirname = "arthera_testnet/",
+    rpc_url="https://rpc-test.arthera.net",
+    chain_id="10243"
+)
+
+MONAD_TESTNET = NetworkClass(
+    name="monad_testnet",
+    dirname = "monad_testnet/",
+    rpc_url="https://rpc-testnet.monadinfra.com/rpc/" + monad_api_key,
+    chain_id="10143"
+)
+
+
 networks = [
     LOCAL_NETWORK,
     NEON_DEVNET,
     ETH_SEPOLIA,
     TAIKO_HEKLA,
+    ARTHERA_TESTNET,
+    MONAD_TESTNET,
     ETH_MAINNET
 ]
 

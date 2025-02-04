@@ -15,6 +15,9 @@ def parse_env_var(network, contract, root=None):
 def extract_address_from_logs(log, network, contract):
     address = log.split(contract.log_splitter)[1].split('\n')[0]
 
+    if not os.path.exists("addresses/" + network.dirname):
+        os.makedirs("addresses/" + network.dirname)
+
     with open(addr_filename(network, contract), 'w') as file:
         file.write(address)
 
