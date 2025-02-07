@@ -48,6 +48,13 @@ TAIKO_HEKLA = NetworkClass(
     chain_id="167009"
 )
 
+ASSET_TESTNET = NetworkClass(
+    name="asset_testnet",
+    dirname = "asset_testnet/",
+    rpc_url="https://enugu-rpc.assetchain.org/",
+    chain_id="42421"
+)
+
 ARTHERA_TESTNET = NetworkClass(
     name="arthera_testnet",
     dirname = "arthera_testnet/",
@@ -68,6 +75,7 @@ networks = [
     NEON_DEVNET,
     ETH_SEPOLIA,
     TAIKO_HEKLA,
+    ASSET_TESTNET,
     ARTHERA_TESTNET,
     MONAD_TESTNET,
     ETH_MAINNET
