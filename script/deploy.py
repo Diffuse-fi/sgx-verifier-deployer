@@ -4,7 +4,7 @@ import os
 import sys
 import argparse
 from utils.functions import is_already_deployed, parse_env_var, extract_address_from_logs, form_command
-from utils.special_checks import asset_chain_config_check
+from utils.special_checks import special_check
 from utils.network import *
 from utils.wrapper import pccs_helpers
 from utils.wrapper import automata_dao_contracts
@@ -67,7 +67,7 @@ with open(logs_path, "w") as file:
 
 def deploy(network):
 
-    asset_chain_config_check(network)
+    special_check(network)
 
     print("writing logs to", logs_path)
 
