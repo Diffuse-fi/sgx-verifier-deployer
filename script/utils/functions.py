@@ -42,6 +42,10 @@ def form_command(contract, network, method=None, input=None):
             method = contract.default_method
         _command.append(method)
 
+    if network.legacy_tx == True:
+        _command.append('--legacy')
+        _command.append('--skip-simulation')
+
     if input is not None:
         _command.extend(input)
 

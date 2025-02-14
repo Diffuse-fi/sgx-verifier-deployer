@@ -27,6 +27,8 @@ def upsert(network):
             cmd.append(attr)
         cmd.append('--private-key=' + os.getenv("PRIVATE_KEY"))
         cmd.append('--rpc-url=' + network.rpc_url)
+        if network.legacy_tx == True:
+            cmd.append('--legacy')
 
         subprocess.run(cmd)
 

@@ -6,6 +6,7 @@ import sys
 class NetworkClass:
     name: str
     dirname: str
+    legacy_tx: bool
     rpc_url: str
     chain_id: str
 
@@ -16,6 +17,7 @@ monad_api_key = os.getenv('MONAD_API_KEY')
 LOCAL_NETWORK = NetworkClass(
     name="local",
     dirname = "local/",
+    legacy_tx = False,
     rpc_url="http://localhost:8545",
     chain_id="31337"
 )
@@ -23,6 +25,7 @@ LOCAL_NETWORK = NetworkClass(
 NEON_DEVNET = NetworkClass(
     name="neon_devnet",
     dirname = "neon_devnet/",
+    legacy_tx = True,
     rpc_url="https://devnet.neonevm.org",
     chain_id="245022926"
 )
@@ -30,6 +33,7 @@ NEON_DEVNET = NetworkClass(
 ETH_SEPOLIA = NetworkClass(
     name="eth_sepolia",
     dirname = "eth_sepolia/",
+    legacy_tx = False,
     rpc_url="https://eth-sepolia.g.alchemy.com/v2/" + alchemy_api_key,
     chain_id="11155111"
 )
@@ -37,6 +41,7 @@ ETH_SEPOLIA = NetworkClass(
 ETH_MAINNET = NetworkClass(
     name="eth_mainnet",
     dirname = "eth_mainnet/",
+    legacy_tx = False,
     rpc_url="https://eth-mainnet.g.alchemy.com/v2/" + alchemy_api_key,
     chain_id="1"
 )
@@ -44,6 +49,7 @@ ETH_MAINNET = NetworkClass(
 TAIKO_HEKLA = NetworkClass(
     name="taiko_hekla",
     dirname = "taiko_hekla/",
+    legacy_tx = False,
     rpc_url="https://rpc.hekla.taiko.xyz",
     chain_id="167009"
 )
@@ -51,6 +57,7 @@ TAIKO_HEKLA = NetworkClass(
 ASSET_TESTNET = NetworkClass(
     name="asset_testnet",
     dirname = "asset_testnet/",
+    legacy_tx = False,
     rpc_url="https://enugu-rpc.assetchain.org/",
     chain_id="42421"
 )
@@ -58,6 +65,7 @@ ASSET_TESTNET = NetworkClass(
 ARTHERA_TESTNET = NetworkClass(
     name="arthera_testnet",
     dirname = "arthera_testnet/",
+    legacy_tx = False,
     rpc_url="https://rpc-test.arthera.net",
     chain_id="10243"
 )
@@ -65,6 +73,7 @@ ARTHERA_TESTNET = NetworkClass(
 MONAD_TESTNET = NetworkClass(
     name="monad_testnet",
     dirname = "monad_testnet/",
+    legacy_tx = False,
     rpc_url="https://rpc-testnet.monadinfra.com/rpc/" + monad_api_key,
     chain_id="10143"
 )
