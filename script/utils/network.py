@@ -11,6 +11,7 @@ class NetworkClass:
 
 alchemy_api_key = os.getenv('ALCHEMY_API_KEY')
 monad_api_key = os.getenv('MONAD_API_KEY')
+ten_api_key = os.getenv('TEN_API_KEY')
 
 
 LOCAL_NETWORK = NetworkClass(
@@ -69,6 +70,13 @@ MONAD_TESTNET = NetworkClass(
     chain_id="10143"
 )
 
+TEN_TESTNET = NetworkClass(
+    name="ten_testnet",
+    dirname = "ten_testnet/",
+    rpc_url="https://testnet.ten.xyz/v1/?token=" + ten_api_key,
+    chain_id="443"
+)
+
 
 networks = [
     LOCAL_NETWORK,
@@ -78,6 +86,7 @@ networks = [
     ASSET_TESTNET,
     ARTHERA_TESTNET,
     MONAD_TESTNET,
+    TEN_TESTNET,
     ETH_MAINNET
 ]
 
