@@ -1,6 +1,6 @@
 [submodule "lib/automata-dcap-qpl"]
 	path = lib/automata-dcap-qpl
-	url = https://github.com/Diffuse-fi/automata-dcap-qpl
+	url = https://github.com/automata-network/automata-dcap-qpl
 
 [submodule "lib/automata-on-chain-pccs"]
 	path = lib/automata-on-chain-pccs
