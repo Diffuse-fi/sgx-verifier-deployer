@@ -48,6 +48,13 @@ TAIKO_HEKLA = NetworkClass(
     chain_id="167009"
 )
 
+TAIKO_MAINNET = NetworkClass(
+    name="taiko_mainnet",
+    dirname = "taiko_mainnet/",
+    rpc_url="https://rpc.mainnet.taiko.xyz",
+    chain_id="167000"
+)
+
 ASSET_TESTNET = NetworkClass(
     name="asset_testnet",
     dirname = "asset_testnet/",
@@ -69,6 +76,106 @@ MONAD_TESTNET = NetworkClass(
     chain_id="10143"
 )
 
+BSC_MAINNET = NetworkClass( # binance smart chain
+    name="bsc_mainnet",
+    dirname = "bsc_mainnet/",
+    rpc_url="https://bsc-dataseed.binance.org/",
+    chain_id="56"
+)
+
+POLYGON_MAINNET = NetworkClass(
+    name="polygon_mainnet",
+    dirname = "polygon_mainnet/",
+    rpc_url="https://polygon-rpc.com/",
+    chain_id="137"
+)
+
+AVAX_MAINNET = NetworkClass( # avalanche c-net
+    name="avax_mainnet",
+    dirname = "avax_mainnet/",
+    rpc_url="https://api.avax.network/ext/bc/C/rpc",
+    chain_id="43114"
+)
+
+FANTOM_MAINNET = NetworkClass( # fantom
+    name="fantom_mainnet",
+    dirname = "fantom_mainnet/",
+    rpc_url="https://rpcapi.fantom.network",
+    chain_id="250"
+)
+
+ARBITRUM_MAINNET = NetworkClass(
+    name="arbitrum_mainnet",
+    dirname = "arbitrum_mainnet/",
+    rpc_url="https://arb1.arbitrum.io/rpc",
+    chain_id="42161"
+)
+
+OPTIMISM_MAINNET = NetworkClass(
+    name="optimism_mainnet",
+    dirname = "optimism_mainnet/",
+    rpc_url="https://mainnet.optimism.io",
+    chain_id="10"
+)
+
+HARMONY_MAINNET = NetworkClass(
+    name="harmony_mainnet",
+    dirname = "harmony_mainnet/",
+    rpc_url="https://api.harmony.one",
+    chain_id="1666600000"
+)
+
+MOONBEAM_MAINNET = NetworkClass(
+    name="moonbeam_mainnet",
+    dirname = "moonbeam_mainnet/",
+    rpc_url="https://rpc.api.moonbeam.network",
+    chain_id="1666600000"
+)
+
+CRONOS_MAINNET = NetworkClass(
+    name="cronos_mainnet",
+    dirname = "cronos_mainnet/",
+    rpc_url="https://evm.cronos.org",
+    chain_id="25"
+)
+
+BASE_MAINNET = NetworkClass(
+    name="base_mainnet",
+    dirname = "base_mainnet/",
+    rpc_url="https://mainnet.base.org",
+    chain_id="8453"
+)
+
+ZKSYNC_MAINNET = NetworkClass(
+    name="zksync_mainnet",
+    dirname = "zksync_mainnet/",
+    rpc_url="https://mainnet.era.zksync.io ",
+    chain_id="324"
+)
+
+WORLD_MAINNET = NetworkClass(
+    name="world_mainnet",
+    dirname = "world_mainnet/",
+    rpc_url="https://worldchain-mainnet.g.alchemy.com/public",
+    chain_id="480"
+)
+
+ZORA_MAINNET = NetworkClass(
+    name="zora_mainnet",
+    dirname = "zora_mainnet/",
+    rpc_url="https://rpc.zora.energy",
+    chain_id="7777777"
+)
+
+ATA_MAINNET = NetworkClass(
+    name="ata_mainnet",
+    dirname = "ata_mainnet/",
+    rpc_url="https://rpc.ata.network",
+    chain_id="65536"
+)
+
+
+
 
 networks = [
     LOCAL_NETWORK,
@@ -78,6 +185,20 @@ networks = [
     ASSET_TESTNET,
     ARTHERA_TESTNET,
     MONAD_TESTNET,
+    BSC_MAINNET,
+    POLYGON_MAINNET,
+    AVAX_MAINNET,
+    FANTOM_MAINNET,
+    ARBITRUM_MAINNET,
+    OPTIMISM_MAINNET,
+    HARMONY_MAINNET,
+    CRONOS_MAINNET,
+    BASE_MAINNET,
+    ZKSYNC_MAINNET,
+    WORLD_MAINNET,
+    ZORA_MAINNET,
+    ATA_MAINNET,
+    TAIKO_MAINNET,
     ETH_MAINNET
 ]
 
