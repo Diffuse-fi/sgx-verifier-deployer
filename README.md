@@ -3,7 +3,7 @@
 This repository contains scripts for Automata's SGX verification contracts deployment. These scripts ensure smooth deployment on multiple chains and are essential for continuous updates of our infrastructure.
 
 ## Overview
-All scripts parse addresses as environment variables. Addresses are stored in addresses/chain_name/env_var_name. So, if there are no contracts at all, like in a fresh local node, then deploy/script.py will deploy all contracts and will write addresses to appropriate files. If there are some contracts, for example, the chain already has DAIMO_P256 and RISCZERO_VERIFIER deployed, but no automata contracts, then write addresses to the corresponding files which will be used in further steps. Here is a brief overview of the contracts: 
+All scripts parse addresses as environment variables. Addresses are stored in addresses/chain_name/env_var_name. So, if there are no contracts at all, like in a fresh local node, then deploy/script.py will deploy all contracts and will write addresses to appropriate files. If there are some contracts, for example, the chain already has DAIMO_P256 and RISCZERO_VERIFIER deployed, but no automata contracts, then write addresses to the corresponding files which will be used in further steps. Here is a brief overview of the contracts:
 
 
 - **RIP7212_P256_PRECOMPILE** – Naive quote verification using secp256r1 signature verification. `P256Configuration.sol` checks if the precompile exists and uses it as a verifier. Some chains may have it but not at the 0x100 address. You have the opportunity to define a custom precompile address.
@@ -33,11 +33,12 @@ All scripts parse addresses as environment variables. Addresses are stored in ad
 ## Prerequisites
 Infrastructure deployment consists of three steps:
 1. Contracts deployment (`script/deploy.py`)
-2. Upload of the certificates that `automata-dcap-qpl-tool` has not uploaded automatically (`script/upsert.py`)
-3. Upload of the collaterals using `automata-dcap-qpl-tool` (`script/run_qpl_tool.py`)
-Some chains may contain already deployed contracts (steps 1-2 done) but with outdated collaterals(step 3). The original `automata-dcap-qpl` repo contains hardcoded contract addresses and rpc_url and cannot be used on any chain out of the box. Our fork parses addresses and rpc_url as environment variables, so it can be used on any chain.
+2. Upload x509 certificates (`script/upsert.py`)
+3. Upload of the expirable collaterals (`script/upsert_expirable_collaterals.py`). Collaterals expire 30 days after requested and must be renewed using `scrips/request_expirable_collaterals.py`.
+Some chains may contain already deployed contracts (steps 1-2 done) but with outdated collaterals(step 3).
+Earlier qpl-tool (script/run_qpl_tool.py) was used for step 3, now it is deprecated.
 
-⚠️ IMPORTANT! ⚠️ You have to use `qpl-tool` with a quote from your machine, not an example quote! The tool will request collaterals from Intel's API for the CPU that created the quote and will upload them on chain. Then automata-dcap-zkvm-cli will parse data from the chain and will fail if there is no data for the target CPU. You will need to update the path to quote in `script/run_qpl_tool.py`
+⚠️ IMPORTANT! ⚠️ You have to use `qpl-tool` with a quote from your machine, not an example quote! The tool will request collaterals from Intel's API for the CPU that created the quote and will upload them on chain. Then automata-dcap-zkvm-cli will parse data from the chain and will fail if there is no data for the target CPU. You will need to update the path to quote in expirable_collaterals scripts or in `script/run_qpl_tool.py`
 
 Scripts read addresses from `addresses/<chain-name>/<environment-variable-name>`.
 Add your chain to `script/utils/network.py and contract addresses to addresses/<chain-name>`.
@@ -52,7 +53,7 @@ Looks like Bonsai works on 1.1, need to checkout to this branch.
 Error in solidity for versions mismatch is "custom error 0xb8b38d4c".
 
 ### Troubleshooting SP1 verifier
-SP1 verifier is not supported for now. Only the Risc0 verifier is used. This repository's scripts are intended to be used specifically with the Risc0 verifier. 
+SP1 verifier is not supported for now. Only the Risc0 verifier is used. This repository's scripts are intended to be used specifically with the Risc0 verifier.
 
 ## Workflow
 ### Launch local node
@@ -75,18 +76,25 @@ source .env
 ```
 
 ### run deployment script
-Build the `qpl` tool:
+run the deployment script:
 ```
-cd lib/automata-dcap-qpl/automata-dcap-qpl-tool
-cargo build --release
-```
-... and run the deployment script:
-```
-python script/deploy_upsert_qpl.py
+python script/deploy.py -n local
 ```
 
-The expected result of the `automata-dcap-qpl-tool` run is
-```missing_collateral: None```
+Upload certificates:
+```
+python script/upsert.py -n local
+```
+
+There are two collaterals, enclave identity and tcb info, that expire every month. Request once a month:
+```
+script/request_expirable_collaterals.py
+```
+
+Upload to chain:
+```
+script/upsert_expirable_collaterals.py -n local
+```
 
 
 ### Great job!
