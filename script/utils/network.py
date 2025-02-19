@@ -91,7 +91,6 @@ BERACHAIN_MAINNET = NetworkClass(
 )
 
 
-
 networks = [
     LOCAL_NETWORK,
     ETH_SEPOLIA,
@@ -105,6 +104,13 @@ networks = [
     ATA_MAINNET,
     BERACHAIN_MAINNET,
 ]
+
+networks_str = networks[0].name
+for n in networks:
+    if n==networks[0]:
+        continue
+    networks_str = networks_str + ", " + n.name
+
 
 def network_class(name):
     for n in networks:
