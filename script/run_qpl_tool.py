@@ -16,17 +16,16 @@ def run_qpl_tool(network):
             continue
         parse_env_var(network, automata_dao_contract)
 
-    subprocess.run(
-        [
-            './lib/automata-dcap-qpl/automata-dcap-qpl-tool/target/release/automata-dcap-qpl-tool',
-            '--quote_file',
-            '../../cli/test_data/0/sgx_quote.bin',
-            '--chain_id=' + network.chain_id,
-            '--rpc_url=' + network.rpc_url,
-            '--private_key=' + os.getenv("PRIVATE_KEY")
-
-        ]
-    )
+    cmd = [
+        './lib/automata-dcap-qpl/automata-dcap-qpl-tool/target/release/automata-dcap-qpl-tool',
+        '--quote_file',
+        '../../cli/test_data/0/sgx_quote.bin',
+        '--chain_id=' + network.chain_id,
+        '--rpc_url=' + network.rpc_url,
+        '--private_key=' + os.getenv("PRIVATE_KEY")
+    ]
+    print(cmd)
+    subprocess.run(cmd)
 
 
 if __name__ == "__main__":
