@@ -2,3 +2,7 @@
 logs/
 addresses/local/
 .env
+
+out/
+broadcast/
+cache/
