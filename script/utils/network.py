@@ -97,11 +97,11 @@ AVAX_MAINNET = NetworkClass( # avalanche c-net
     chain_id="43114"
 )
 
-FANTOM_MAINNET = NetworkClass( # fantom
-    name="fantom_mainnet",
-    dirname = "fantom_mainnet/",
-    rpc_url="https://rpcapi.fantom.network",
-    chain_id="250"
+SONIC_MAINNET = NetworkClass(
+    name="sonic_mainnet",
+    dirname = "sonic_mainnet/",
+    rpc_url="https://rpc.soniclabs.com",
+    chain_id="146"
 )
 
 ARBITRUM_MAINNET = NetworkClass(
@@ -174,6 +174,26 @@ ATA_MAINNET = NetworkClass(
     chain_id="65536"
 )
 
+BERACHAIN_MAINNET = NetworkClass(
+    name="bera_mainnet",
+    dirname = "bera_mainnet/",
+    rpc_url="https://rpc.berachain.com/",
+    chain_id="80094"
+)
+
+ZIRCUIT_MAINNET = NetworkClass(
+    name="zircuit_mainnet",
+    dirname = "zircuit_mainnet/",
+    rpc_url="https://mainnet.zircuit.com",
+    chain_id="48900"
+)
+
+MANTLE_MAINNET = NetworkClass(
+    name="mantle_mainnet",
+    dirname = "mantle_mainnet/",
+    rpc_url="https://rpc.mantle.xyz",
+    chain_id="5000"
+)
 
 
 
@@ -188,7 +208,7 @@ networks = [
     BSC_MAINNET,
     POLYGON_MAINNET,
     AVAX_MAINNET,
-    FANTOM_MAINNET,
+    SONIC_MAINNET,
     ARBITRUM_MAINNET,
     OPTIMISM_MAINNET,
     HARMONY_MAINNET,
@@ -199,6 +219,9 @@ networks = [
     ZORA_MAINNET,
     ATA_MAINNET,
     TAIKO_MAINNET,
+    BERACHAIN_MAINNET,
+    ZIRCUIT_MAINNET,
+    MANTLE_MAINNET,
     ETH_MAINNET
 ]
 
