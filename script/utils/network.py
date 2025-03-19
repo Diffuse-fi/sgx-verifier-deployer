@@ -10,13 +10,12 @@ class NetworkClass:
     chain_id: str
 
 alchemy_api_key = os.getenv('ALCHEMY_API_KEY')
-monad_api_key = os.getenv('MONAD_API_KEY')
 
 
 LOCAL_NETWORK = NetworkClass(
     name="local",
     dirname = "local/",
-    rpc_url="http://localhost:8545",
+    rpc_url="http://localhost:1488",
     chain_id="31337"
 )
 
@@ -62,17 +61,10 @@ ASSET_TESTNET = NetworkClass(
     chain_id="42421"
 )
 
-ARTHERA_TESTNET = NetworkClass(
-    name="arthera_testnet",
-    dirname = "arthera_testnet/",
-    rpc_url="https://rpc-test.arthera.net",
-    chain_id="10243"
-)
-
 MONAD_TESTNET = NetworkClass(
     name="monad_testnet",
     dirname = "monad_testnet/",
-    rpc_url="https://rpc-testnet.monadinfra.com/rpc/" + monad_api_key,
+    rpc_url="https://testnet-rpc.monad.xyz/",
     chain_id="10143"
 )
 
@@ -114,7 +106,7 @@ ARBITRUM_MAINNET = NetworkClass(
 OPTIMISM_MAINNET = NetworkClass(
     name="optimism_mainnet",
     dirname = "optimism_mainnet/",
-    rpc_url="https://mainnet.optimism.io",
+    rpc_url="https://optimism.rpc.subquery.network/public",
     chain_id="10"
 )
 
@@ -203,7 +195,6 @@ networks = [
     ETH_SEPOLIA,
     TAIKO_HEKLA,
     ASSET_TESTNET,
-    ARTHERA_TESTNET,
     MONAD_TESTNET,
     BSC_MAINNET,
     POLYGON_MAINNET,
