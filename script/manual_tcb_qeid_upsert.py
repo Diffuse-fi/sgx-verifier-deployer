@@ -4,6 +4,7 @@ from utils.network import *
 from utils.functions import parse_env_var
 from utils.wrapper import FMSPC_TCB_DAO, ENCLAVE_ID_DAO
 import argparse
+import json
 
 def upsert_fmspc_dao(network):
     RPC_URL = network.rpc_url
@@ -14,25 +15,10 @@ def upsert_fmspc_dao(network):
         raise Exception("RPC connection error")
 
     # FMSPC contract ABI
-    ABI = """
-    [
-        {
-            "inputs": [{
-                    "internalType": "struct TcbInfoJsonObj",
-                    "name": "tcbInfoObj",
-                    "type": "tuple",
-                    "components": [
-                        {"name": "tcbInfoStr","type": "string"},
-                        {"name": "signature","type": "bytes"}
-                ]}
-            ],
-            "name": "upsertFmspcTcb",
-            "outputs": [{"internalType": "bytes32","name": "attestationId","type": "bytes32"}],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        }
-    ]
-    """
+    with open("lib/automata-on-chain-pccs/js/tcbinfo/abi/FmspcTcbDao.json", "r") as file:
+        data = json.load(file)
+        ABI = data["abi"]
+
     contract = web3.eth.contract(os.getenv("FMSPC_TCB_DAO"), abi=ABI)
 
     # tx input from qpl-tool
@@ -57,29 +43,10 @@ def upsert_enclave_identity(network):
 
     # EnclaveIdentityDao contract ABI
     # upsertEnclaveIdentity(uint256 id, uint256 version, EnclaveIdentityJsonObj calldata enclaveIdentityObj) external returns (bytes32 attestationId)
-    ABI = """
-    [
-        {
-            "inputs": [
-                {"internalType": "uint256", "name": "id", "type": "uint256"},
-                {"internalType": "uint256", "name": "version", "type": "uint256"},
-                {
-                    "internalType": "struct EnclaveIdentityJsonObj",
-                    "name": "EnclaveIdentityJsonObj",
-                    "type": "tuple",
-                    "components": [
-                        {"name": "identityStr", "type": "string"},
-                        {"name": "signature", "type": "bytes"}
-                    ]
-                }
-            ],
-            "name": "upsertEnclaveIdentity",
-            "outputs": [{"internalType": "bytes32", "name": "attestationId", "type": "bytes32"}],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        }
-    ]
-    """
+    with open("lib/automata-on-chain-pccs/js/identity/abi/EnclaveIdentityDao.json", "r") as file:
+        data = json.load(file)
+        ABI = data["abi"]
+
     contract = web3.eth.contract(os.getenv("ENCLAVE_ID_DAO"), abi=ABI)
 
     # tx input from qpl-tool
@@ -114,7 +81,6 @@ def common_part(network, web3, encoded_data, recepient):
 
     # sign and send tx
     signed_txn = web3.eth.account.sign_transaction(txn_data, os.getenv("PRIVATE_KEY"))
-    txn_hash = web3.eth.send_raw_transaction(signed_txn.raw_transaction)
 
     try:
         web3.eth.call(txn_data)
@@ -123,6 +89,7 @@ def common_part(network, web3, encoded_data, recepient):
         sys.exit(1)
 
 
+    txn_hash = web3.eth.send_raw_transaction(signed_txn.raw_transaction)
     print(f"Transaction sent: {txn_hash.hex()}")
 
     # wait for confirmation
