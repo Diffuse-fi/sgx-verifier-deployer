@@ -15,7 +15,7 @@ alchemy_api_key = os.getenv('ALCHEMY_API_KEY')
 LOCAL_NETWORK = NetworkClass(
     name="local",
     dirname = "local/",
-    rpc_url="http://localhost:1488",
+    rpc_url="http://localhost:8545",
     chain_id="31337"
 )
 

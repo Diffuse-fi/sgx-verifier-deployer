@@ -22,9 +22,15 @@ def upsert_fmspc_dao(network):
     contract = web3.eth.contract(os.getenv("FMSPC_TCB_DAO"), abi=ABI)
 
     # tx input from qpl-tool
+    with open("script/collaterals/tcbInfo/object", 'r') as file:
+        object = file.read()
+
+    with open("script/collaterals/tcbInfo/signature", 'r') as file:
+        signature = file.read()
+
     tcb_info = (
-        '{"version":2,"issueDate":"2025-03-12T20:36:57Z","nextUpdate":"2025-04-11T20:36:57Z","fmspc":"00606a000000","pceId":"0000","tcbType":0,"tcbEvaluationDataNumber":17,"tcbLevels":[{"tcb":{"sgxtcbcomp01svn":14,"sgxtcbcomp02svn":14,"sgxtcbcomp03svn":3,"sgxtcbcomp04svn":3,"sgxtcbcomp05svn":255,"sgxtcbcomp06svn":255,"sgxtcbcomp07svn":1,"sgxtcbcomp08svn":0,"sgxtcbcomp09svn":0,"sgxtcbcomp10svn":0,"sgxtcbcomp11svn":0,"sgxtcbcomp12svn":0,"sgxtcbcomp13svn":0,"sgxtcbcomp14svn":0,"sgxtcbcomp15svn":0,"sgxtcbcomp16svn":0,"pcesvn":13},"tcbDate":"2024-03-13T00:00:00Z","tcbStatus":"SWHardeningNeeded"},{"tcb":{"sgxtcbcomp01svn":14,"sgxtcbcomp02svn":14,"sgxtcbcomp03svn":3,"sgxtcbcomp04svn":3,"sgxtcbcomp05svn":255,"sgxtcbcomp06svn":255,"sgxtcbcomp07svn":0,"sgxtcbcomp08svn":0,"sgxtcbcomp09svn":0,"sgxtcbcomp10svn":0,"sgxtcbcomp11svn":0,"sgxtcbcomp12svn":0,"sgxtcbcomp13svn":0,"sgxtcbcomp14svn":0,"sgxtcbcomp15svn":0,"sgxtcbcomp16svn":0,"pcesvn":13},"tcbDate":"2024-03-13T00:00:00Z","tcbStatus":"ConfigurationAndSWHardeningNeeded"},{"tcb":{"sgxtcbcomp01svn":12,"sgxtcbcomp02svn":12,"sgxtcbcomp03svn":3,"sgxtcbcomp04svn":3,"sgxtcbcomp05svn":255,"sgxtcbcomp06svn":255,"sgxtcbcomp07svn":1,"sgxtcbcomp08svn":0,"sgxtcbcomp09svn":0,"sgxtcbcomp10svn":0,"sgxtcbcomp11svn":0,"sgxtcbcomp12svn":0,"sgxtcbcomp13svn":0,"sgxtcbcomp14svn":0,"sgxtcbcomp15svn":0,"sgxtcbcomp16svn":0,"pcesvn":13},"tcbDate":"2023-08-09T00:00:00Z","tcbStatus":"OutOfDate"},{"tcb":{"sgxtcbcomp01svn":12,"sgxtcbcomp02svn":12,"sgxtcbcomp03svn":3,"sgxtcbcomp04svn":3,"sgxtcbcomp05svn":255,"sgxtcbcomp06svn":255,"sgxtcbcomp07svn":0,"sgxtcbcomp08svn":0,"sgxtcbcomp09svn":0,"sgxtcbcomp10svn":0,"sgxtcbcomp11svn":0,"sgxtcbcomp12svn":0,"sgxtcbcomp13svn":0,"sgxtcbcomp14svn":0,"sgxtcbcomp15svn":0,"sgxtcbcomp16svn":0,"pcesvn":13},"tcbDate":"2023-08-09T00:00:00Z","tcbStatus":"OutOfDateConfigurationNeeded"},{"tcb":{"sgxtcbcomp01svn":11,"sgxtcbcomp02svn":11,"sgxtcbcomp03svn":3,"sgxtcbcomp04svn":3,"sgxtcbcomp05svn":255,"sgxtcbcomp06svn":255,"sgxtcbcomp07svn":1,"sgxtcbcomp08svn":0,"sgxtcbcomp09svn":0,"sgxtcbcomp10svn":0,"sgxtcbcomp11svn":0,"sgxtcbcomp12svn":0,"sgxtcbcomp13svn":0,"sgxtcbcomp14svn":0,"sgxtcbcomp15svn":0,"sgxtcbcomp16svn":0,"pcesvn":13},"tcbDate":"2023-02-15T00:00:00Z","tcbStatus":"OutOfDate"},{"tcb":{"sgxtcbcomp01svn":11,"sgxtcbcomp02svn":11,"sgxtcbcomp03svn":3,"sgxtcbcomp04svn":3,"sgxtcbcomp05svn":255,"sgxtcbcomp06svn":255,"sgxtcbcomp07svn":0,"sgxtcbcomp08svn":0,"sgxtcbcomp09svn":0,"sgxtcbcomp10svn":0,"sgxtcbcomp11svn":0,"sgxtcbcomp12svn":0,"sgxtcbcomp13svn":0,"sgxtcbcomp14svn":0,"sgxtcbcomp15svn":0,"sgxtcbcomp16svn":0,"pcesvn":13},"tcbDate":"2023-02-15T00:00:00Z","tcbStatus":"OutOfDateConfigurationNeeded"},{"tcb":{"sgxtcbcomp01svn":7,"sgxtcbcomp02svn":9,"sgxtcbcomp03svn":3,"sgxtcbcomp04svn":3,"sgxtcbcomp05svn":255,"sgxtcbcomp06svn":255,"sgxtcbcomp07svn":1,"sgxtcbcomp08svn":0,"sgxtcbcomp09svn":0,"sgxtcbcomp10svn":0,"sgxtcbcomp11svn":0,"sgxtcbcomp12svn":0,"sgxtcbcomp13svn":0,"sgxtcbcomp14svn":0,"sgxtcbcomp15svn":0,"sgxtcbcomp16svn":0,"pcesvn":13},"tcbDate":"2022-08-10T00:00:00Z","tcbStatus":"OutOfDate"},{"tcb":{"sgxtcbcomp01svn":7,"sgxtcbcomp02svn":9,"sgxtcbcomp03svn":3,"sgxtcbcomp04svn":3,"sgxtcbcomp05svn":255,"sgxtcbcomp06svn":255,"sgxtcbcomp07svn":0,"sgxtcbcomp08svn":0,"sgxtcbcomp09svn":0,"sgxtcbcomp10svn":0,"sgxtcbcomp11svn":0,"sgxtcbcomp12svn":0,"sgxtcbcomp13svn":0,"sgxtcbcomp14svn":0,"sgxtcbcomp15svn":0,"sgxtcbcomp16svn":0,"pcesvn":13},"tcbDate":"2022-08-10T00:00:00Z","tcbStatus":"OutOfDateConfigurationNeeded"},{"tcb":{"sgxtcbcomp01svn":4,"sgxtcbcomp02svn":4,"sgxtcbcomp03svn":3,"sgxtcbcomp04svn":3,"sgxtcbcomp05svn":255,"sgxtcbcomp06svn":255,"sgxtcbcomp07svn":0,"sgxtcbcomp08svn":0,"sgxtcbcomp09svn":0,"sgxtcbcomp10svn":0,"sgxtcbcomp11svn":0,"sgxtcbcomp12svn":0,"sgxtcbcomp13svn":0,"sgxtcbcomp14svn":0,"sgxtcbcomp15svn":0,"sgxtcbcomp16svn":0,"pcesvn":11},"tcbDate":"2021-11-10T00:00:00Z","tcbStatus":"OutOfDate"},{"tcb":{"sgxtcbcomp01svn":4,"sgxtcbcomp02svn":4,"sgxtcbcomp03svn":3,"sgxtcbcomp04svn":3,"sgxtcbcomp05svn":255,"sgxtcbcomp06svn":255,"sgxtcbcomp07svn":0,"sgxtcbcomp08svn":0,"sgxtcbcomp09svn":0,"sgxtcbcomp10svn":0,"sgxtcbcomp11svn":0,"sgxtcbcomp12svn":0,"sgxtcbcomp13svn":0,"sgxtcbcomp14svn":0,"sgxtcbcomp15svn":0,"sgxtcbcomp16svn":0,"pcesvn":10},"tcbDate":"2020-11-11T00:00:00Z","tcbStatus":"OutOfDate"},{"tcb":{"sgxtcbcomp01svn":4,"sgxtcbcomp02svn":4,"sgxtcbcomp03svn":3,"sgxtcbcomp04svn":3,"sgxtcbcomp05svn":255,"sgxtcbcomp06svn":255,"sgxtcbcomp07svn":0,"sgxtcbcomp08svn":0,"sgxtcbcomp09svn":0,"sgxtcbcomp10svn":0,"sgxtcbcomp11svn":0,"sgxtcbcomp12svn":0,"sgxtcbcomp13svn":0,"sgxtcbcomp14svn":0,"sgxtcbcomp15svn":0,"sgxtcbcomp16svn":0,"pcesvn":5},"tcbDate":"2018-01-04T00:00:00Z","tcbStatus":"OutOfDate"}]}',
-        web3.to_bytes(hexstr="0xd51bad8908fa4261d94b2a32bdb5e1ea00d241d6d50132d2087fef62cf7ea4ad07042a3ccfbd0ea55d5c10bbc37b5165c0fb3301f002b898b00ccb4a1797ab71")  # signature
+        object,
+        web3.to_bytes(hexstr=signature)
     )
 
     # abi encoding
@@ -50,9 +56,15 @@ def upsert_enclave_identity(network):
     contract = web3.eth.contract(os.getenv("ENCLAVE_ID_DAO"), abi=ABI)
 
     # tx input from qpl-tool
+    with open("script/collaterals/enclaveIdentity/object", 'r') as file:
+        object = file.read()
+
+    with open("script/collaterals/enclaveIdentity/signature", 'r') as file:
+        signature = file.read()
+
     enclave_identity_json_obj = (
-        '{"id":"QE","version":2,"issueDate":"2025-03-12T17:30:38Z","nextUpdate":"2025-04-11T17:30:38Z","tcbEvaluationDataNumber":17,"miscselect":"00000000","miscselectMask":"FFFFFFFF","attributes":"11000000000000000000000000000000","attributesMask":"FBFFFFFFFFFFFFFF0000000000000000","mrsigner":"8C4F5775D796503E96137F77C68A829A0056AC8DED70140B081B094490C57BFF","isvprodid":1,"tcbLevels":[{"tcb":{"isvsvn":8},"tcbDate":"2024-03-13T00:00:00Z","tcbStatus":"UpToDate"},{"tcb":{"isvsvn":6},"tcbDate":"2021-11-10T00:00:00Z","tcbStatus":"OutOfDate"},{"tcb":{"isvsvn":5},"tcbDate":"2020-11-11T00:00:00Z","tcbStatus":"OutOfDate"},{"tcb":{"isvsvn":4},"tcbDate":"2019-11-13T00:00:00Z","tcbStatus":"OutOfDate"},{"tcb":{"isvsvn":2},"tcbDate":"2019-05-15T00:00:00Z","tcbStatus":"OutOfDate"},{"tcb":{"isvsvn":1},"tcbDate":"2018-08-15T00:00:00Z","tcbStatus":"OutOfDate"}]}',
-        web3.to_bytes(hexstr="0x09b6256751c46ad3e09dcb37318db32a18f9e741926ef596d646a7ffa5437a6893f06d0ce077e310ae78ce8b24a3c5229714f71711fb5cd27e8bb575cbaf32ef")  # signature
+        object,
+        web3.to_bytes(hexstr=signature)
     )
 
     # abi encoding
