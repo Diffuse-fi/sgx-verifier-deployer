@@ -27,6 +27,27 @@ ETH_SEPOLIA = NetworkClass(
     chain_id="11155111"
 )
 
+ETH_MAINNET = NetworkClass(
+    name="eth_mainnet",
+    dirname = "eth_mainnet/",
+    rpc_url="https://eth-mainnet.g.alchemy.com/v2/" + alchemy_api_key,
+    chain_id="1"
+)
+
+TAIKO_HEKLA = NetworkClass(
+    name="taiko_hekla",
+    dirname = "taiko_hekla/",
+    rpc_url="https://rpc.hekla.taiko.xyz",
+    chain_id="167009"
+)
+
+TAIKO_MAINNET = NetworkClass(
+    name="taiko_mainnet",
+    dirname = "taiko_mainnet/",
+    rpc_url="https://rpc.mainnet.taiko.xyz",
+    chain_id="167000"
+)
+
 ASSET_TESTNET = NetworkClass(
     name="asset_testnet",
     dirname = "asset_testnet/",
@@ -90,6 +111,21 @@ BERACHAIN_MAINNET = NetworkClass(
     chain_id="80094"
 )
 
+ZIRCUIT_MAINNET = NetworkClass(
+    name="zircuit_mainnet",
+    dirname = "zircuit_mainnet/",
+    rpc_url="https://mainnet.zircuit.com",
+    chain_id="48900"
+)
+
+MANTLE_MAINNET = NetworkClass(
+    name="mantle_mainnet",
+    dirname = "mantle_mainnet/",
+    rpc_url="https://rpc.mantle.xyz",
+    chain_id="5000"
+)
+
+
 
 networks = [
     LOCAL_NETWORK,
@@ -102,7 +138,11 @@ networks = [
     OPTIMISM_MAINNET,
     BASE_MAINNET,
     ATA_MAINNET,
+    TAIKO_MAINNET,
     BERACHAIN_MAINNET,
+    ZIRCUIT_MAINNET,
+    MANTLE_MAINNET,
+    ETH_MAINNET
 ]
 
 networks_str = networks[0].name
