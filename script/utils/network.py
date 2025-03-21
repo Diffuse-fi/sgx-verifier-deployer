@@ -10,21 +10,14 @@ class NetworkClass:
     chain_id: str
 
 alchemy_api_key = os.getenv('ALCHEMY_API_KEY')
-monad_api_key = os.getenv('MONAD_API_KEY')
+anvil_port = os.getenv('ANVIL_PORT')
 
 
 LOCAL_NETWORK = NetworkClass(
     name="local",
     dirname = "local/",
-    rpc_url="http://localhost:8545",
+    rpc_url="http://localhost:" + anvil_port,
     chain_id="31337"
-)
-
-NEON_DEVNET = NetworkClass(
-    name="neon_devnet",
-    dirname = "neon_devnet/",
-    rpc_url="https://devnet.neonevm.org",
-    chain_id="245022926"
 )
 
 ETH_SEPOLIA = NetworkClass(
@@ -34,20 +27,6 @@ ETH_SEPOLIA = NetworkClass(
     chain_id="11155111"
 )
 
-ETH_MAINNET = NetworkClass(
-    name="eth_mainnet",
-    dirname = "eth_mainnet/",
-    rpc_url="https://eth-mainnet.g.alchemy.com/v2/" + alchemy_api_key,
-    chain_id="1"
-)
-
-TAIKO_HEKLA = NetworkClass(
-    name="taiko_hekla",
-    dirname = "taiko_hekla/",
-    rpc_url="https://rpc.hekla.taiko.xyz",
-    chain_id="167009"
-)
-
 ASSET_TESTNET = NetworkClass(
     name="asset_testnet",
     dirname = "asset_testnet/",
@@ -55,30 +34,76 @@ ASSET_TESTNET = NetworkClass(
     chain_id="42421"
 )
 
-ARTHERA_TESTNET = NetworkClass(
-    name="arthera_testnet",
-    dirname = "arthera_testnet/",
-    rpc_url="https://rpc-test.arthera.net",
-    chain_id="10243"
-)
-
 MONAD_TESTNET = NetworkClass(
     name="monad_testnet",
     dirname = "monad_testnet/",
-    rpc_url="https://rpc-testnet.monadinfra.com/rpc/" + monad_api_key,
+    rpc_url="https://testnet-rpc.monad.xyz/",
     chain_id="10143"
 )
+
+AVAX_MAINNET = NetworkClass( # avalanche c-net
+    name="avax_mainnet",
+    dirname = "avax_mainnet/",
+    rpc_url="https://api.avax.network/ext/bc/C/rpc",
+    chain_id="43114"
+)
+
+SONIC_MAINNET = NetworkClass(
+    name="sonic_mainnet",
+    dirname = "sonic_mainnet/",
+    rpc_url="https://rpc.soniclabs.com",
+    chain_id="146"
+)
+
+ARBITRUM_MAINNET = NetworkClass(
+    name="arbitrum_mainnet",
+    dirname = "arbitrum_mainnet/",
+    rpc_url="https://arb1.arbitrum.io/rpc",
+    chain_id="42161"
+)
+
+OPTIMISM_MAINNET = NetworkClass(
+    name="optimism_mainnet",
+    dirname = "optimism_mainnet/",
+    rpc_url="https://optimism.rpc.subquery.network/public",
+    chain_id="10"
+)
+
+BASE_MAINNET = NetworkClass(
+    name="base_mainnet",
+    dirname = "base_mainnet/",
+    rpc_url="https://mainnet.base.org",
+    chain_id="8453"
+)
+
+ATA_MAINNET = NetworkClass(
+    name="ata_mainnet",
+    dirname = "ata_mainnet/",
+    rpc_url="https://rpc.ata.network",
+    chain_id="65536"
+)
+
+BERACHAIN_MAINNET = NetworkClass(
+    name="bera_mainnet",
+    dirname = "bera_mainnet/",
+    rpc_url="https://rpc.berachain.com/",
+    chain_id="80094"
+)
+
 
 
 networks = [
     LOCAL_NETWORK,
-    NEON_DEVNET,
     ETH_SEPOLIA,
-    TAIKO_HEKLA,
     ASSET_TESTNET,
-    ARTHERA_TESTNET,
     MONAD_TESTNET,
-    ETH_MAINNET
+    AVAX_MAINNET,
+    SONIC_MAINNET,
+    ARBITRUM_MAINNET,
+    OPTIMISM_MAINNET,
+    BASE_MAINNET,
+    ATA_MAINNET,
+    BERACHAIN_MAINNET,
 ]
 
 def network_class(name):
