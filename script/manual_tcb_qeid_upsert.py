@@ -78,14 +78,14 @@ def common_part(network, web3, encoded_data, recepient):
 
     # print(f"ABI-Encoded Data: {encoded_data}")
 
-    max_priority_fee = web3.to_wei(10, "gwei")
+    current_gas_price = web3.eth.gas_price
+    print("current", network.name, "gas price:", current_gas_price / (10**9), "gwei")
 
     txn_data = {
         "from": os.getenv("PUBLIC_KEY"),
         "to": recepient,
         "gas": 10000000,
-        "maxFeePerGas": web3.to_wei(10, "gwei"),
-        "maxPriorityFeePerGas": max_priority_fee,
+        "gasPrice": current_gas_price,
         "nonce": web3.eth.get_transaction_count(os.getenv("PUBLIC_KEY")),
         "chainId": int(network.chain_id),
         "data": encoded_data,
