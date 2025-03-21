@@ -84,8 +84,8 @@ def common_part(network, web3, encoded_data, recepient):
     txn_data = {
         "from": os.getenv("PUBLIC_KEY"),
         "to": recepient,
-        "gas": 10000000,
-        "gasPrice": current_gas_price,
+        "gas": 5000000,
+        "gasPrice": int(1.1 * current_gas_price),
         "nonce": web3.eth.get_transaction_count(os.getenv("PUBLIC_KEY")),
         "chainId": int(network.chain_id),
         "data": encoded_data,
