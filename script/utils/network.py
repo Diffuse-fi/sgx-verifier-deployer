@@ -90,6 +90,13 @@ BERACHAIN_MAINNET = NetworkClass(
     chain_id="80094"
 )
 
+OASIS_SAPPHIRE = NetworkClass(
+    name="oasis_sapphire",
+    dirname = "oasis_sapphire/",
+    rpc_url="https://testnet.sapphire.oasis.io",
+    chain_id="23295"
+)
+
 
 networks = [
     LOCAL_NETWORK,
@@ -103,6 +110,7 @@ networks = [
     BASE_MAINNET,
     ATA_MAINNET,
     BERACHAIN_MAINNET,
+    OASIS_SAPPHIRE,
 ]
 
 networks_str = networks[0].name
