@@ -19,6 +19,8 @@ def call_script(network, contract, method=None, input=None):
     print(contract.script_contract_name, method if method is not None else contract.default_method, end="...\n")
 
     _command = form_command(contract, network, method, input)
+    _command.append('--delay')
+    _command.append('10')
 
     result = subprocess.run(_command, capture_output=True, text=True)
 
@@ -65,6 +67,8 @@ logs_path = os.path.join(logs_dir, current_time + ".txt")
 with open(logs_path, "w") as file:
     file.write(current_time + "\n")
 
+import time
+
 def deploy(network):
 
     asset_chain_config_check(network)
@@ -77,27 +81,38 @@ def deploy(network):
     # steps from https://github.com/automata-network/automata-on-chain-pccs
     for pccs_helper in pccs_helpers:
         deploy_contract(network, pccs_helper)
+        time.sleep(10)
 
     # 2 steps not from on-chain-pccs, because they are hardcoded in original automata repo
     #TODO: don't need to deploy if RIP7212_P256_PRECOMPILE, not handled now and deploys in any case
     deploy_contract(network, DAIMO_P256, input=["--private-key", os.getenv("PRIVATE_KEY")])
     os.environ["RIP7212_P256_PRECOMPILE"] = '0x0000000000000000000000000000000000000100'
+    time.sleep(10)
 
     deploy_contract(network, DEPLOY_AUTOMATA_DAO, input=["true"])
+    time.sleep(10)
     call_script(network, CONFIG_AUTOMATA_DAO)
+    time.sleep(10)
 
     # steps from https://github.com/automata-network/automata-dcap-attestation
     deploy_contract(network, PCCS_ROUTER)
+    time.sleep(10)
     deploy_contract(network, DCAP_ATTESTATION)
+    time.sleep(10)
 
     deploy_contract(network, V3_VERIFIER)
+    time.sleep(10)
     call_script(network, DCAP_ATTESTATION, method="configVerifier(address)", input=[os.getenv("V3_VERIFIER")])
+    time.sleep(10)
 
     deploy_contract(network, V4_VERIFIER)
+    time.sleep(10)
     call_script(network, DCAP_ATTESTATION, method="configVerifier(address)", input=[os.getenv("V4_VERIFIER")])
+    time.sleep(10)
 
     ImageID = "83613a8beec226d1f29714530f1df791fa16c2c4dfcf22c50ab7edac59ca637f"
     deploy_contract(network, RISCZERO_VERIFIER)
+    time.sleep(10)
     call_script(
         network,
         DCAP_ATTESTATION,

@@ -116,9 +116,10 @@ def common_part(network, web3, encoded_data, recepient):
     else:
         print(f"Transaction confirmed! Hash: {txn_hash.hex()}")
 
-
+import time
 def upsert_collaterals(network):
     upsert_fmspc_dao(network)
+    time.sleep(10)
     upsert_enclave_identity(network)
 
 

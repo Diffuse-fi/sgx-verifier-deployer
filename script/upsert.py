@@ -10,7 +10,7 @@ class CA(Enum):
     PLATFORM = "2"
     SIGNING = "3"
 
-
+import time
 def upsert(network):
 
     # script uses hardcoded inputs that I took from transactions in automata testnet
@@ -46,7 +46,10 @@ def upsert(network):
         cmd.append('--private-key=' + os.getenv("PRIVATE_KEY"))
         cmd.append('--rpc-url=' + network.rpc_url)
 
+        print(cmd)
+
         subprocess.run(cmd)
+        time.sleep(10)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Data feeder parameters")
