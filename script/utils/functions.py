@@ -35,6 +35,8 @@ def form_command(contract, network, method=None, input=None):
     _command.append("--rpc-url=" + network.rpc_url,)
     _command.append("-vvvv",)
     _command.append("--broadcast")
+    _command.append("--skip-simulation")
+    _command.append("--legacy")
 
     if contract.default_method != "":
         _command.append("--sig")

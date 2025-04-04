@@ -90,6 +90,13 @@ BERACHAIN_MAINNET = NetworkClass(
     chain_id="80094"
 )
 
+AURORA_TESTNET = NetworkClass(
+    name="aurora_testnet",
+    dirname = "aurora_testnet/",
+    rpc_url="https://testnet.aurora.dev/",
+    chain_id="1313161555"
+)
+
 
 networks = [
     LOCAL_NETWORK,
@@ -103,6 +110,7 @@ networks = [
     BASE_MAINNET,
     ATA_MAINNET,
     BERACHAIN_MAINNET,
+    AURORA_TESTNET,
 ]
 
 networks_str = networks[0].name
