@@ -11,6 +11,7 @@ class NetworkClass:
 
 alchemy_api_key = os.getenv('ALCHEMY_API_KEY')
 anvil_port = os.getenv('ANVIL_PORT')
+anvil_port_2 = os.getenv('ANVIL_PORT_2')
 
 
 LOCAL_NETWORK = NetworkClass(
@@ -20,10 +21,24 @@ LOCAL_NETWORK = NetworkClass(
     chain_id="31337"
 )
 
+LOCAL_NETWORK_2 = NetworkClass(
+    name="local_2",
+    dirname = "local_2/",
+    rpc_url="http://localhost:" + anvil_port_2,
+    chain_id="31337"
+)
+
 ETH_SEPOLIA = NetworkClass(
     name="eth_sepolia",
     dirname = "eth_sepolia/",
     rpc_url="https://eth-sepolia.g.alchemy.com/v2/" + alchemy_api_key,
+    chain_id="11155111"
+)
+
+ETH_HOLESKY = NetworkClass(
+    name="eth_holesky",
+    dirname = "eth_holesky/",
+    rpc_url="https://eth-holesky.g.alchemy.com/v2/" + alchemy_api_key,
     chain_id="11155111"
 )
 
@@ -65,7 +80,7 @@ ARBITRUM_MAINNET = NetworkClass(
 OPTIMISM_MAINNET = NetworkClass(
     name="optimism_mainnet",
     dirname = "optimism_mainnet/",
-    rpc_url="https://optimism.rpc.subquery.network/public",
+    rpc_url="https://opt-mainnet.g.alchemy.com/v2/" + alchemy_api_key,
     chain_id="10"
 )
 
@@ -93,7 +108,9 @@ BERACHAIN_MAINNET = NetworkClass(
 
 networks = [
     LOCAL_NETWORK,
+    LOCAL_NETWORK_2,
     ETH_SEPOLIA,
+    ETH_HOLESKY,
     ASSET_TESTNET,
     MONAD_TESTNET,
     AVAX_MAINNET,
