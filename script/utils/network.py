@@ -105,6 +105,13 @@ BERACHAIN_MAINNET = NetworkClass(
     chain_id="80094"
 )
 
+MANTLE_MAINNET = NetworkClass(
+    name="mantle_mainnet",
+    dirname = "mantle_mainnet/",
+    rpc_url="https://rpc.mantle.xyz",
+    chain_id="5000"
+)
+
 
 networks = [
     LOCAL_NETWORK,
@@ -120,6 +127,7 @@ networks = [
     BASE_MAINNET,
     ATA_MAINNET,
     BERACHAIN_MAINNET,
+    MANTLE_MAINNET,
 ]
 
 networks_str = networks[0].name

@@ -81,11 +81,15 @@ def common_part(network, web3, encoded_data, recepient):
     current_gas_price = web3.eth.gas_price
     print("current", network.name, "gas price:", current_gas_price / (10**9), "gwei")
 
+    gas = 9000000
+    if network == MANTLE_MAINNET:
+        gas = 30_000_000_000
+
     txn_data = {
         "from": os.getenv("PUBLIC_KEY"),
         "to": recepient,
-        "gas": 5000000,
-        "gasPrice": int(1.1 * current_gas_price),
+        "gas": gas,
+        "gasPrice": int(2 * current_gas_price),
         "nonce": web3.eth.get_transaction_count(os.getenv("PUBLIC_KEY")),
         "chainId": int(network.chain_id),
         "data": encoded_data,
