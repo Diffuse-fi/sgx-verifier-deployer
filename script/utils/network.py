@@ -112,6 +112,13 @@ MANTLE_MAINNET = NetworkClass(
     chain_id="5000"
 )
 
+TAIKO_MAINNET = NetworkClass(
+    name="taiko_mainnet",
+    dirname = "taiko_mainnet/",
+    rpc_url="https://rpc.mainnet.taiko.xyz",
+    chain_id="167000"
+)
+
 
 networks = [
     LOCAL_NETWORK,
@@ -128,6 +135,7 @@ networks = [
     ATA_MAINNET,
     BERACHAIN_MAINNET,
     MANTLE_MAINNET,
+    TAIKO_MAINNET,
 ]
 
 networks_str = networks[0].name
